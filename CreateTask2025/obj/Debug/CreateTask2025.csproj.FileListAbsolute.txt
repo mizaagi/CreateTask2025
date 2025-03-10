@@ -1,0 +1,11 @@
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\bin\Debug\CreateTask2025.exe.config
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\bin\Debug\CreateTask2025.exe
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\bin\Debug\CreateTask2025.pdb
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.csproj.AssemblyReference.cache
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.csproj.SuggestedBindingRedirects.cache
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.Form1.resources
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.Properties.Resources.resources
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.csproj.GenerateResource.cache
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.csproj.CoreCompileInputs.cache
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.exe
+C:\Users\kohn.m\source\repos\CreateTask2025\CreateTask2025\obj\Debug\CreateTask2025.pdb

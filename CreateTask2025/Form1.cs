@@ -16,5 +16,16 @@ namespace CreateTask2025
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            textBox1.Clear();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            comboBox1.DroppedDown = true;
+        }
     }
 }

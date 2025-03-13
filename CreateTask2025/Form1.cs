@@ -15,6 +15,7 @@ namespace CreateTask2025
     {
         private String termOrDef = "term";
         private ArrayList definitions = new ArrayList();
+        private int selected;
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +24,7 @@ namespace CreateTask2025
             label1.Text = "";
             enterInfoBox.Visible = false;
             submitNewButton.Visible = false;
+            deleteTermButton.Visible = false;
         }
 
         private void submitAnswerButton_Click(object sender, EventArgs e)
@@ -35,18 +37,29 @@ namespace CreateTask2025
         {
             flashcardsListBox.Visible = !flashcardsListBox.Visible;
             newTermButton.Visible = !newTermButton.Visible;
+            deleteTermButton.Visible = false;
+            enterInfoBox.Visible = false;
+            submitNewButton.Visible = false;
+            label1.Text = "";
             flashcardsListBox.Text = "";
         }
 
         // https://stackoverflow.com/questions/4454423/c-sharp-listbox-item-double-click-event
         private void flashcardsListBox_DoubleClick(object sender, EventArgs e)
-        {
-            // termOrDef =
+        {   
+            if (flashcardsListBox.SelectedItem != null)
+            {
+                termOrDef = "edit";
+                selected = flashcardsListBox.Items.IndexOf(flashcardsListBox.SelectedItem);
+                deleteTermButton.Visible = true;
+            }
+            
         }
 
         private void newTermButton_Click(object sender, EventArgs e)
         {
             label1.Text = "Enter term:";
+            termOrDef = "term";
             enterInfoBox.Visible = true;
             submitNewButton.Visible = true;
         }
@@ -64,9 +77,19 @@ namespace CreateTask2025
                 label1.Text = "";
                 submitNewButton.Visible = false;
                 enterInfoBox.Visible = false;
+                enterInfoBox.Text = "";
+            } else if (termOrDef.Equals("edit"))
+            {
+
             }
             
 
+        }
+
+        private void deleteTermButton_Click(object sender, EventArgs e)
+        {
+            flashcardsListBox.Items.RemoveAt(selected);
+            definitions.RemoveAt(selected);
         }
     }
 }

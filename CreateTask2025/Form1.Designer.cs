@@ -38,6 +38,7 @@
             this.enterInfoBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.submitNewButton = new System.Windows.Forms.Button();
+            this.deleteTermButton = new System.Windows.Forms.Button();
             promptLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.rightWrong)).BeginInit();
             this.SuspendLayout();
@@ -131,11 +132,22 @@
             this.submitNewButton.UseVisualStyleBackColor = true;
             this.submitNewButton.Click += new System.EventHandler(this.submitNewButton_Click);
             // 
+            // deleteTermButton
+            // 
+            this.deleteTermButton.Location = new System.Drawing.Point(139, 42);
+            this.deleteTermButton.Name = "deleteTermButton";
+            this.deleteTermButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteTermButton.TabIndex = 13;
+            this.deleteTermButton.Text = "Delete Term";
+            this.deleteTermButton.UseVisualStyleBackColor = true;
+            this.deleteTermButton.Click += new System.EventHandler(this.deleteTermButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.deleteTermButton);
             this.Controls.Add(this.submitNewButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.enterInfoBox);
@@ -165,6 +177,7 @@
         private System.Windows.Forms.TextBox enterInfoBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button submitNewButton;
+        private System.Windows.Forms.Button deleteTermButton;
     }
 }
 

@@ -8,29 +8,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
 
 namespace CreateTask2025
 {
     public partial class Form1 : Form
     {
-        private String termOrDef = "term";
-        private ArrayList definitions = new ArrayList();
+        private List<string> definitions = new List<string>();
         private int selected;
+        bool submit = false;
         public Form1()
         {
             InitializeComponent();
             flashcardsListBox.Visible = false;
             newTermButton.Visible = false;
-            label1.Text = "";
-            enterInfoBox.Visible = false;
-            submitNewButton.Visible = false;
             deleteTermButton.Visible = false;
+            editTermButton.Visible = false;
+            correctImg.Visible = false;
+            incorrectImg.Visible = false;
         }
 
         private void submitAnswerButton_Click(object sender, EventArgs e)
         {
-
-            answerBox.Clear();
+            submit = true;
+            submit = false;
         }
 
         private void editFlashcardsButton_Click(object sender, EventArgs e)
@@ -38,10 +39,7 @@ namespace CreateTask2025
             flashcardsListBox.Visible = !flashcardsListBox.Visible;
             newTermButton.Visible = !newTermButton.Visible;
             deleteTermButton.Visible = false;
-            enterInfoBox.Visible = false;
-            submitNewButton.Visible = false;
-            label1.Text = "";
-            flashcardsListBox.Text = "";
+            editTermButton.Visible = false;
         }
 
         // https://stackoverflow.com/questions/4454423/c-sharp-listbox-item-double-click-event
@@ -49,40 +47,18 @@ namespace CreateTask2025
         {   
             if (flashcardsListBox.SelectedItem != null)
             {
-                termOrDef = "edit";
                 selected = flashcardsListBox.Items.IndexOf(flashcardsListBox.SelectedItem);
                 deleteTermButton.Visible = true;
+                editTermButton.Visible = true;
             }
-            
         }
 
         private void newTermButton_Click(object sender, EventArgs e)
         {
-            label1.Text = "Enter term:";
-            termOrDef = "term";
-            enterInfoBox.Visible = true;
-            submitNewButton.Visible = true;
-        }
-
-        private void submitNewButton_Click(object sender, EventArgs e)
-        {   
-            if (termOrDef.Equals("term")) {
-                flashcardsListBox.Items.Add(enterInfoBox.Text);
-                enterInfoBox.Text = "";
-                label1.Text = "Enter definition:";
-                termOrDef = "definition";
-            } else if (termOrDef.Equals("definition"))
-            {
-                definitions.Add(enterInfoBox.Text);
-                label1.Text = "";
-                submitNewButton.Visible = false;
-                enterInfoBox.Visible = false;
-                enterInfoBox.Text = "";
-            } else if (termOrDef.Equals("edit"))
-            {
-
-            }
-            
+            string term = Interaction.InputBox("Enter term: ", "New Flashcard");
+            flashcardsListBox.Items.Add(term);
+            string definition = Interaction.InputBox("Enter definition: ", "New Flashcard");
+            definitions.Add(definition);
 
         }
 
@@ -90,6 +66,51 @@ namespace CreateTask2025
         {
             flashcardsListBox.Items.RemoveAt(selected);
             definitions.RemoveAt(selected);
+        }
+
+        private void editTermButton_Click(object sender, EventArgs e)
+        {
+            string term = Interaction.InputBox("Enter new term: ", "Edit Flashcard");
+            flashcardsListBox.Items[selected] = term;
+            
+            string definition = Interaction.InputBox("Enter new definition: ", "Edit Flashcard");
+            definitions[selected] = definition;
+        }
+
+        private void quiz(string tOrD)
+        {
+            if (tOrD == "term")
+            {
+                for (int i = 0; i < definitions.Count; i++)
+                {
+                    label1.Text = definitions[i];
+                    if (answerBox.Text == (string)flashcardsListBox.Items[i])
+                    {
+                        correctImg.Visible = true;
+                        incorrectImg.Visible = false;
+                    }
+                    else
+                    {
+                        correctImg.Visible = false;
+                        incorrectImg.Visible = true;
+                    }
+                }
+            }
+            else if (tOrD == "definition")
+            {
+
+            }
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            string tOrD = Interaction.InputBox("Enter term or definition?", "Quiz Type");
+            quiz(tOrD);
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

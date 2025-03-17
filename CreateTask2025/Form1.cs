@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 using Microsoft.VisualBasic;
 
 namespace CreateTask2025
@@ -31,6 +32,7 @@ namespace CreateTask2025
         private void submitAnswerButton_Click(object sender, EventArgs e)
         {
             submit = true;
+            answerBox.Clear();
             submit = false;
         }
 
@@ -83,16 +85,20 @@ namespace CreateTask2025
             {
                 for (int i = 0; i < definitions.Count; i++)
                 {
-                    label1.Text = definitions[i];
-                    if (answerBox.Text == (string)flashcardsListBox.Items[i])
+                    // https://stackoverflow.com/questions/57745760/how-to-set-a-text-to-a-label-from-another-thread
+                    this.Invoke((MethodInvoker)delegate { label1.Text = definitions[i]; });
+                    while (!submit) { }
+                    if (answerBox.Text.Equals((string)flashcardsListBox.Items[i]))
+
                     {
-                        correctImg.Visible = true;
-                        incorrectImg.Visible = false;
+                        this.Invoke((MethodInvoker)delegate { correctImg.Visible = true; });
+                        this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = false; });
                     }
                     else
                     {
-                        correctImg.Visible = false;
-                        incorrectImg.Visible = true;
+                        this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
+                        this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = true; });
+                        
                     }
                 }
             }
@@ -105,7 +111,8 @@ namespace CreateTask2025
         private void startButton_Click(object sender, EventArgs e)
         {
             string tOrD = Interaction.InputBox("Enter term or definition?", "Quiz Type");
-            quiz(tOrD);
+            Thread yippee = new Thread(() => quiz(tOrD));
+            yippee.Start();
         }
 
         private void stopButton_Click(object sender, EventArgs e)

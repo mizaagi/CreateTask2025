@@ -18,6 +18,7 @@ namespace CreateTask2025
         private List<string> definitions = new List<string>();
         private int selected;
         bool submit = false;
+        bool quizContinue = true;
         public Form1()
         {
             InitializeComponent();
@@ -32,8 +33,7 @@ namespace CreateTask2025
         private void submitAnswerButton_Click(object sender, EventArgs e)
         {
             submit = true;
-            answerBox.Clear();
-            submit = false;
+
         }
 
         private void editFlashcardsButton_Click(object sender, EventArgs e)
@@ -68,6 +68,9 @@ namespace CreateTask2025
         {
             flashcardsListBox.Items.RemoveAt(selected);
             definitions.RemoveAt(selected);
+
+            editTermButton.Visible = false;
+            deleteTermButton.Visible = false;
         }
 
         private void editTermButton_Click(object sender, EventArgs e)
@@ -77,47 +80,85 @@ namespace CreateTask2025
             
             string definition = Interaction.InputBox("Enter new definition: ", "Edit Flashcard");
             definitions[selected] = definition;
+
+            editTermButton.Visible = false;
+            deleteTermButton.Visible = false;
         }
 
-        private void quiz(string tOrD)
+        private async void quiz(string tOrD)
         {
-            if (tOrD == "term")
+            while (quizContinue)
             {
-                for (int i = 0; i < definitions.Count; i++)
+                if (tOrD == "term")
                 {
-                    // https://stackoverflow.com/questions/57745760/how-to-set-a-text-to-a-label-from-another-thread
-                    this.Invoke((MethodInvoker)delegate { label1.Text = definitions[i]; });
-                    while (!submit) { }
-                    if (answerBox.Text.Equals((string)flashcardsListBox.Items[i]))
-
+                    for (int i = 0; i < definitions.Count; i++)
                     {
-                        this.Invoke((MethodInvoker)delegate { correctImg.Visible = true; });
+                        // https://stackoverflow.com/questions/57745760/how-to-set-a-text-to-a-label-from-another-thread
+                        this.Invoke((MethodInvoker)delegate { label1.Text = definitions[i]; });
+                        while (!submit) { }
+                        if (answerBox.Text.Equals(((string)flashcardsListBox.Items[i]).Trim()))
+
+                        {
+                            this.Invoke((MethodInvoker)delegate { correctImg.Visible = true; });
+                            this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = false; });
+                        }
+                        else
+                        {
+                            this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
+                            this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = true; });
+
+                        }
+                        this.Invoke((MethodInvoker)delegate { answerBox.Clear(); });
+                        this.Invoke((MethodInvoker)delegate { submit = false; });
+                        await Task.Delay(500);
+                        this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
                         this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = false; });
                     }
-                    else
+                }
+                else if (tOrD == "definition")
+                {
+                    for (int i = 0; i < definitions.Count; i++)
                     {
+                        // https://stackoverflow.com/questions/57745760/how-to-set-a-text-to-a-label-from-another-thread
+                        this.Invoke((MethodInvoker)delegate { label1.Text = (string)flashcardsListBox.Items[i]; });
+                        while (!submit) { }
+                        if (answerBox.Text.Equals(definitions[i].Trim()))
+
+                        {
+                            this.Invoke((MethodInvoker)delegate { correctImg.Visible = true; });
+                            this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = false; });
+                        }
+                        else
+                        {
+                            this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
+                            this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = true; });
+                        }
+                        this.Invoke((MethodInvoker)delegate { answerBox.Clear(); });
+                        this.Invoke((MethodInvoker)delegate { submit = false; });
+                        await Task.Delay(500);
                         this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
-                        this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = true; });
-                        
+                        this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = false; });
                     }
                 }
-            }
-            else if (tOrD == "definition")
-            {
-
             }
         }
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            quizContinue = true;
+            flashcardsListBox.Visible = false;
+            newTermButton.Visible = false;
+            deleteTermButton.Visible = false;
+            editTermButton.Visible = false;
             string tOrD = Interaction.InputBox("Enter term or definition?", "Quiz Type");
-            Thread yippee = new Thread(() => quiz(tOrD));
-            yippee.Start();
+            Thread newQuiz = new Thread(() => quiz(tOrD));
+            newQuiz.Start();
         }
 
         private void stopButton_Click(object sender, EventArgs e)
         {
-
+            quizContinue = false;
+            label1.Text = "";
         }
     }
 }

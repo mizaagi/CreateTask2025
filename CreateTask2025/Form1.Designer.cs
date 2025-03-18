@@ -49,19 +49,20 @@
             // 
             // answerBox
             // 
-            this.answerBox.Location = new System.Drawing.Point(12, 397);
+            this.answerBox.Location = new System.Drawing.Point(13, 357);
             this.answerBox.Name = "answerBox";
             this.answerBox.Size = new System.Drawing.Size(776, 20);
             this.answerBox.TabIndex = 0;
             // 
             // submitAnswerButton
             // 
-            this.submitAnswerButton.Location = new System.Drawing.Point(338, 423);
+            this.submitAnswerButton.BackColor = System.Drawing.Color.NavajoWhite;
+            this.submitAnswerButton.Location = new System.Drawing.Point(237, 383);
             this.submitAnswerButton.Name = "submitAnswerButton";
-            this.submitAnswerButton.Size = new System.Drawing.Size(118, 23);
+            this.submitAnswerButton.Size = new System.Drawing.Size(325, 63);
             this.submitAnswerButton.TabIndex = 2;
             this.submitAnswerButton.Text = "Submit Answer";
-            this.submitAnswerButton.UseVisualStyleBackColor = true;
+            this.submitAnswerButton.UseVisualStyleBackColor = false;
             this.submitAnswerButton.Click += new System.EventHandler(this.submitAnswerButton_Click);
             // 
             // editFlashcardsButton
@@ -166,6 +167,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.incorrectImg);
             this.Controls.Add(this.label1);

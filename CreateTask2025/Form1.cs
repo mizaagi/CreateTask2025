@@ -160,5 +160,11 @@ namespace CreateTask2025
             quizContinue = false;
             label1.Text = "";
         }
+
+        private void uploadFileButton_Click(object sender, EventArgs e)
+        {
+            // https://stackoverflow.com/questions/19660775/how-to-use-open-file-dialog
+
+        }
     }
 }

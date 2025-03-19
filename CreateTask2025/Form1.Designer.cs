@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.incorrectImg = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.uploadFileButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.correctImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.incorrectImg)).BeginInit();
             this.SuspendLayout();
@@ -56,7 +57,7 @@
             // 
             // submitAnswerButton
             // 
-            this.submitAnswerButton.BackColor = System.Drawing.Color.NavajoWhite;
+            this.submitAnswerButton.BackColor = System.Drawing.SystemColors.HotTrack;
             this.submitAnswerButton.Location = new System.Drawing.Point(237, 383);
             this.submitAnswerButton.Name = "submitAnswerButton";
             this.submitAnswerButton.Size = new System.Drawing.Size(325, 63);
@@ -163,12 +164,25 @@
             this.incorrectImg.TabIndex = 18;
             this.incorrectImg.TabStop = false;
             // 
+            // uploadFileButton
+            // 
+            this.uploadFileButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.uploadFileButton.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.uploadFileButton.Location = new System.Drawing.Point(113, 13);
+            this.uploadFileButton.Name = "uploadFileButton";
+            this.uploadFileButton.Size = new System.Drawing.Size(75, 23);
+            this.uploadFileButton.TabIndex = 19;
+            this.uploadFileButton.Text = "Upload File";
+            this.uploadFileButton.UseVisualStyleBackColor = false;
+            this.uploadFileButton.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.uploadFileButton);
             this.Controls.Add(this.incorrectImg);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.stopButton);
@@ -205,6 +219,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox incorrectImg;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button uploadFileButton;
     }
 }
 

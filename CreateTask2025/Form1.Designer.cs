@@ -174,7 +174,7 @@
             this.uploadFileButton.TabIndex = 19;
             this.uploadFileButton.Text = "Upload File";
             this.uploadFileButton.UseVisualStyleBackColor = false;
-            this.uploadFileButton.Click += new System.EventHandler(this.button1_Click);
+            this.uploadFileButton.Click += new System.EventHandler(this.uploadFileButton_Click);
             // 
             // Form1
             // 
@@ -196,7 +196,7 @@
             this.Controls.Add(this.submitAnswerButton);
             this.Controls.Add(this.answerBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Flashcard Studier";
             ((System.ComponentModel.ISupportInitialize)(this.correctImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.incorrectImg)).EndInit();
             this.ResumeLayout(false);

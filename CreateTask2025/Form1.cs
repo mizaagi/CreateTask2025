@@ -6,6 +6,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
+using System.Security;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
@@ -106,6 +108,7 @@ namespace CreateTask2025
                         {
                             this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
                             this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = true; });
+                            this.Invoke((MethodInvoker)delegate { label1.Text = (string)flashcardsListBox.Items[i]; });
 
                         }
                         this.Invoke((MethodInvoker)delegate { answerBox.Clear(); });
@@ -132,6 +135,7 @@ namespace CreateTask2025
                         {
                             this.Invoke((MethodInvoker)delegate { correctImg.Visible = false; });
                             this.Invoke((MethodInvoker)delegate { incorrectImg.Visible = true; });
+                            this.Invoke((MethodInvoker)delegate { label1.Text = definitions[i]; });
                         }
                         this.Invoke((MethodInvoker)delegate { answerBox.Clear(); });
                         this.Invoke((MethodInvoker)delegate { submit = false; });
@@ -164,6 +168,31 @@ namespace CreateTask2025
         private void uploadFileButton_Click(object sender, EventArgs e)
         {
             // https://stackoverflow.com/questions/19660775/how-to-use-open-file-dialog
+            // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-open-files-using-the-openfiledialog-component?view=netframeworkdesktop-4.8
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.InitialDirectory = "%%USER%%/Documents";
+            dlg.Title = "Browse Text Files";
+            dlg.DefaultExt = "txt";
+            dlg.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (dlg.ShowDialog() != DialogResult.OK)
+                return;
+            try
+            {
+                StreamReader sr = new StreamReader(dlg.FileName);
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string newTerm = line;
+                    line = sr.ReadLine();
+                    string newDefinition = line;
+                    flashcardsListBox.Items.Add(newTerm);
+                    definitions.Add(newDefinition);
+                }
+            }
+            catch (SecurityException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
     }

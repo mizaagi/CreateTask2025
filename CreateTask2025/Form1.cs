@@ -63,7 +63,6 @@ namespace CreateTask2025
             flashcardsListBox.Items.Add(term);
             string definition = Interaction.InputBox("Enter definition: ", "New Flashcard");
             definitions.Add(definition);
-
         }
 
         private void deleteTermButton_Click(object sender, EventArgs e)
@@ -98,7 +97,7 @@ namespace CreateTask2025
                         // https://stackoverflow.com/questions/57745760/how-to-set-a-text-to-a-label-from-another-thread
                         this.Invoke((MethodInvoker)delegate { label1.Text = definitions[i]; });
                         while (!submit) { }
-                        if (answerBox.Text.Equals(((string)flashcardsListBox.Items[i]).Trim()))
+                        if (answerBox.Text.Equals((flashcardsListBox.Items[i]).Trim()))
 
                         {
                             this.Invoke((MethodInvoker)delegate { correctImg.Visible = true; });
